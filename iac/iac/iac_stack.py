@@ -33,10 +33,10 @@ class IacStack(Stack):
 
         lambda_url = lambda_fn.add_function_url(
             auth_type=_lambda.FunctionUrlAuthType.NONE,
-            cors=_lambda.FunctionUrlCorsOptions(
+            # cors=_lambda.FunctionUrlCorsOptions(
             # allowed_origins=["*"],
-            allowed_methods=[_lambda.HttpMethod.ALL],
-            ),
+            # allowed_methods=[_lambda.HttpMethod.ALL],
+            # ),
         )
 
         password = self.project_name + "UserPassword7@"
