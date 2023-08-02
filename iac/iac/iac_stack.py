@@ -35,7 +35,8 @@ class IacStack(Stack):
             auth_type=_lambda.FunctionUrlAuthType.NONE,
             cors=_lambda.FunctionUrlCorsOptions(
             allowed_origins=["*"],
-            allowed_methods=[_lambda.HttpMethod.ALL],
+            allowed_methods=[_lambda.HttpMethod.POST],
+            max_age=Duration.seconds(10),
             ),
         )
 
