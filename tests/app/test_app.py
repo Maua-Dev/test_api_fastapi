@@ -58,6 +58,6 @@ class Test_App:
         })
 
         assert resp == {
-            "current_balance": 1387.0,
+            "current_balance": 1000,
             "timestamp": 1690482853890, #milliseconds
         }
