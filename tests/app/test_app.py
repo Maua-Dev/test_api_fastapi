@@ -20,13 +20,9 @@ class Test_App:
                 {
                     "type" : "deposit",
                     "value" : 100.0,
+                    "current_balance": "1000.0",
                     "timestamp" : 1690482853890
                 },
-                {
-                    "type" : "withdraw",
-                    "value" : 200.0,
-                    "timestamp" : 1690482853890
-                }
             ]
         }
         
@@ -44,6 +40,7 @@ class Test_App:
         assert type(resp) == dict
         assert resp['type'] == 'withdraw'
         assert resp['current_balance'] == 613.0
+        assert resp['value'] == 387.0
         assert type(resp['timestamp']) == float
         
     def test_deposit(self):
@@ -60,5 +57,6 @@ class Test_App:
         assert type(resp) == dict
         assert resp['type'] == 'deposit'
         assert resp['current_balance'] == 1000
+        assert resp['value'] == 387.0
         assert type(resp['timestamp']) == float
 
