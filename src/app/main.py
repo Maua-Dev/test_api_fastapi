@@ -57,7 +57,8 @@ def withdraw(request: dict):
     }
     global all_transactions
     all_transactions.append(response)
-    return response
+    return 
+    response
     
 @app.post("/deposit")
 def deposit(request: dict):
