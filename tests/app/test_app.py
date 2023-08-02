@@ -6,9 +6,9 @@ class Test_App:
         resp = read_root()
 
         assert resp == {
-            "name": "Vitor Soller",
-            "agency": "7777",
-            "account": "69420-7",
+            "name": "Luigi Trevisan",
+            "agency": "0000",
+            "account": "00000-0",
             "current_balance": 1000.0
         }
 
@@ -41,10 +41,10 @@ class Test_App:
             "2": 1
         })
 
-        assert type(resp) == dict
-        assert resp['type'] == 'withdraw'
-        assert resp['current_balance'] == 613.0
-        assert type(resp['timestamp']) == float
+        assert resp == {
+            "current_balance": 613.0,
+            "timestamp": 1690482853890, #milliseconds
+        }
         
     def test_deposit(self):
         resp = deposit({
@@ -57,8 +57,7 @@ class Test_App:
             "2": 1
         })
 
-        assert type(resp) == dict
-        assert resp['type'] == 'deposit'
-        assert resp['current_balance'] == 1000
-        assert type(resp['timestamp']) == float
-
+        assert resp == {
+            "current_balance": 1000,
+            "timestamp": 1690482853890, #milliseconds
+        }
