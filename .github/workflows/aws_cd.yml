@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - homolog
 jobs:
   DeployToAWS:
     environment: 
