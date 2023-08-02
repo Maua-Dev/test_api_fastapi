@@ -2,12 +2,12 @@ from fastapi import FastAPI
 from mangum import Mangum
 
 app = FastAPI()
-# app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 current_balance = 1000.0
 
 @app.get("/")
 def read_root():
+    global current_balance
     return {
         "name": "Luigi Trevisan",
         "agency": "0000",
@@ -43,6 +43,7 @@ def withdraw(request: dict):
     notas5 = request.get("5", 0)
     notas2 = request.get("2", 0)
 
+    global current_balance
     current_balance = current_balance - (notas200 * 200) - (notas100 * 100) - (notas50 * 50) - (notas20 * 20) - (notas10 * 10) - (notas5 * 5) - (notas2 * 2)
 
     return {
@@ -60,6 +61,7 @@ def deposit(request: dict):
     notas5 = request.get("5")
     notas2 = request.get("2")
 
+    global current_balance
     current_balance = current_balance + (notas200 * 200) + (notas100 * 100) + (notas50 * 50) + (notas20 * 20) + (notas10 * 10) + (notas5 * 5) + (notas2 * 2)
     return {
         "current_balance": current_balance,
