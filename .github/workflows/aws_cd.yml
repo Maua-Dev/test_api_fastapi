@@ -1,9 +1,10 @@
 name: AWS CD
 on:
   workflow_dispatch:
-#   push:
-#     branches:
-#       - dev
+  push:
+    branches:
+      - dev
+      - homolog
 jobs:
   DeployToAWS:
     environment: 
