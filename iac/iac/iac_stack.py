@@ -20,6 +20,7 @@ class IacStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         self.project_name = os.environ.get("PROJECT_NAME")
+        self.stack_name = os.environ.get("STACK_NAME")
         self.aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
 
         lambda_fn = _lambda.Function(
@@ -42,10 +43,10 @@ class IacStack(Stack):
             ),
         )
 
-        password = self.project_name + "UserPassword7@"
+        password = self.stack_name + "UserPassword7@"
 
-        user = iam.User(self, self.project_name + "User",
-                        user_name=self.project_name + "User",
+        user = iam.User(self, self.stack_name + "User",
+                        user_name=self.stack_name + "User",
                         password_reset_required=True,
                         password=SecretValue.unsafe_plain_text(password)
                         )
@@ -74,33 +75,33 @@ class IacStack(Stack):
         alarm = lambda_fn.metric_invocations(
             period=Duration.hours(6),
         ).create_alarm(
-            self, self.project_name +"LambdaAlarm",
+            self, self.stack_name +"LambdaAlarm",
             threshold=5000,
             evaluation_periods=1,
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
-        topic = Topic.from_topic_arn(self, self.project_name + "Topic", f"arn:aws:sns:{self.region}:{self.aws_account_id}:sns-simplefastapi")
+        topic = Topic.from_topic_arn(self, self.stack_name + "Topic", f"arn:aws:sns:{self.region}:{self.aws_account_id}:sns-simplefastapi")
         sns_action = SnsAction(topic)
 
         alarm.add_alarm_action(sns_action)
 
-        CfnOutput(self, self.project_name + "Url",
+        CfnOutput(self, self.stack_name + "Url",
                   value=lambda_url.url,
-                  export_name= self.project_name + 'UrlValue')    
+                  export_name= self.stack_name + 'UrlValue')    
 
-        CfnOutput(self, self.project_name + "UserOutput",
+        CfnOutput(self, self.stack_name + "UserOutput",
                   value=user.user_name,
-                  export_name= self.project_name + 'UserValue'
+                  export_name= self.stack_name + 'UserValue'
                   )
 
-        CfnOutput(self, self.project_name + "FirstTimeUserPassword",
+        CfnOutput(self, self.stack_name + "FirstTimeUserPassword",
                   value=password,
-                  export_name= self.project_name + 'FirstTimeUserPasswordValue'
+                  export_name= self.stack_name + 'FirstTimeUserPasswordValue'
                   )    
         
-        CfnOutput(self, self.project_name + "LambdaConsole",
+        CfnOutput(self, self.stack_name + "LambdaConsole",
                     value="https://" + self.region + ".console.aws.amazon.com/lambda/home?region=" + self.region + "#/functions/" + lambda_fn.function_name + "?tab=code",
-                    export_name= self.project_name + 'LambdaConsoleValue'
+                    export_name= self.stack_name + 'LambdaConsoleValue'
                     )
         
 
