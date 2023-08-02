@@ -46,7 +46,7 @@ def withdraw(request: dict):
 
     global current_balance
     current_balance = current_balance - value 
-    timestamp = datetime.now().timestamp()
+    timestamp = datetime.now().timestamp() * 1000
     
     response = {
         "type": "withdraw",
@@ -75,7 +75,7 @@ def deposit(request: dict):
     current_balance = current_balance + value
 
     global all_transactions
-    timestamp = datetime.now().timestamp()
+    timestamp = datetime.now().timestamp() * 1000
     response = {
         "type": "deposit",
         "current_balance": current_balance,
