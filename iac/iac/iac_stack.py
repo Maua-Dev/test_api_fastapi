@@ -60,7 +60,10 @@ class IacStack(Stack):
         policy.add_statements(
             iam.PolicyStatement(
                 actions=["logs:*"],
-                resources=["arn:aws:logs:*:*:*"]
+                # only can access lambda logs
+                resources=[
+                    f"arn:aws:logs:{self.region}:{self.aws_account_id}:log-group:/aws/lambda/{lambda_fn.function_name}:*"
+                ],
             )
         )
 
