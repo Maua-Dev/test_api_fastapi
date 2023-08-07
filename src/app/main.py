@@ -28,7 +28,8 @@ def read_root():
 @app.get("/history")
 def get_history():
     global all_transactions
-    return {
+    return 
+{
         'all_transactions' : all_transactions
     }
 
@@ -50,7 +51,6 @@ def withdraw(request: dict):
     
     response = {
         "type": "withdraw",
-        "current_balance": current_balance,
         "timestamp": timestamp, #milliseconds
         "value": value
     }
