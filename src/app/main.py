@@ -1,5 +1,5 @@
 from datetime import datetime
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from mangum import Mangum
 
 app = FastAPI()
@@ -54,6 +54,8 @@ def withdraw(request: dict):
         "timestamp": timestamp, #milliseconds
         "value": value
     }
+
+    raise HTTPException(status_code=403, detail="Saldo insuficiente para transação!")
 
     global all_transactions
     all_transactions.append(response)
