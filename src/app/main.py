@@ -51,6 +51,7 @@ def withdraw(request: dict):
     response = {
         "type": "withdraw",
         "timestamp": timestamp, #milliseconds
+        "current_balance": current_balance,
         "value": value
     }
 
