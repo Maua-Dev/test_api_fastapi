@@ -54,8 +54,6 @@ def withdraw(request: dict):
         "value": value
     }
 
-    raise HTTPException(status_code=403, detail="Saldo insuficiente para transação!")
-
     global all_transactions
     all_transactions.append(response)
     return response
