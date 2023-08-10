@@ -28,8 +28,7 @@ def read_root():
 @app.get("/history")
 def get_history():
     global all_transactions
-    return 
-{
+    return {
         'all_transactions' : all_transactions
     }
 
